@@ -7,14 +7,13 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This game is a memory game that is played by flipping one card at a time. if 2 cards match, then they are kept facing up. This process is repeated until all the matches are found.
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+There are 3 things included which are:
+- Star Rating (from 3 to 0) based on the performance and the number of moves.
+- Timer to calculate the time spent playing.
+- Reset Button to replay the game.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+This repository is my own version of Udacity Memory Game. If you belive you can contribute to my version of the game, please check out [CONTRIBUTING.md](CONTRIBUTING.md).
