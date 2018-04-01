@@ -194,7 +194,6 @@ let timeCounter = 0;
 function countUp() {
 	timeCounter++;
 	timePointer = setTimeout(countUp, 1000);
-	console.log(timeCounter);
 	displayTimeCounter();
 }
 
