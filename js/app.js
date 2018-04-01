@@ -54,8 +54,15 @@ cardShuffling();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+//to begin the counter once the player start playing
+let started = false;
 deck.addEventListener('click', clickCard);
 function clickCard(event){
+	if (!started){
+	started = true;
+	timeCounter = 0;
+	countUp();
+	}
 	if (event.target.nodeName.toLowerCase() == 'li' && event.target.className != "card open show" &&
 	 	event.target.className != "card match") {
 		displayCardSymbol(event);
@@ -172,4 +179,17 @@ function resetStars() {
 	for (let i = 0; i < 3; i++){
 		stars.appendChild(star.cloneNode(true));
 	}
+}
+
+let timeCounter = 0;
+function countUp() {
+	timeCounter++;
+	setTimeout("countUp()", 1000);
+	console.log(timeCounter);
+	displayTimeCounter();
+}
+
+let timeSpan = document.querySelector('.timer');
+function displayTimeCounter() {
+	timeSpan.textContent = timeCounter;
 }
