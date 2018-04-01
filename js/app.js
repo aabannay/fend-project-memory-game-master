@@ -53,18 +53,20 @@ for (let i = 0; i < cards.length; i++){
 
 deck.addEventListener('click', clickCard);
 function clickCard(event){
-	if (event.target.nodeName.toLowerCase() == 'li') {
+	if (event.target.nodeName.toLowerCase() == 'li' && event.target.className != "card open show" &&
+	 	event.target.className != "card match") {
 		displayCardSymbol(event);
 		let numOfOpenCards = addToOpenCards(event);
 		if (numOfOpenCards == 2){
 			checkMatch();
 		}
 		countMoves();
+		updateStars();
 	}
 }
 
 function displayCardSymbol(event){
-	event.target.className += " open show";
+	event.target.className = "card open show";
 }
 
 let openCards = [];
@@ -83,13 +85,13 @@ function checkMatch(){
 	} else { setTimeout(function removeCards(){
 			openCards[0].className = "card";
 			openCards[1].className = "card"
-			openCards = [];}, 1000);
+			openCards = [];}, 500);
 	}
 }
 
 function lockOpen(){
-	openCards[0].className += " match";
-	openCards[1].className += " match";
+	openCards[0].className = "card match";
+	openCards[1].className = "card match";
 	openCards = [];
 }
 
@@ -99,4 +101,13 @@ const movesSpan = document.querySelector('.moves');
 function countMoves(){
 	moveCounter += 1;
 	movesSpan.textContent = moveCounter;
+}
+
+const stars = document.querySelector('.stars');
+function updateStars(){
+	if (moveCounter == 25){
+		stars.removeChild(stars.firstElementChild);
+	} else if (moveCounter == 40){
+		stars.removeChild(stars.firstElementChild);
+	} else {;}
 }
