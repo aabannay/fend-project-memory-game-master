@@ -56,12 +56,13 @@ cardShuffling();
 
 //to begin the counter once the player start playing
 let started = false;
+let timePointer;
 deck.addEventListener('click', clickCard);
 function clickCard(event){
 	if (!started){
-	started = true;
-	timeCounter = 0;
-	countUp();
+		started = true;
+		timeCounter = 0;
+		timePointer = setTimeout(countUp, 1000);
 	}
 	if (event.target.nodeName.toLowerCase() == 'li' && event.target.className != "card open show" &&
 	 	event.target.className != "card match") {
@@ -166,6 +167,8 @@ function resetGame() {
 	cardShuffling();
 	resetMoves();
 	resetStars();
+	resetTimer();
+	openCards = []; //empty open cards list
 }
 
 function resetMoves() {
@@ -184,7 +187,7 @@ function resetStars() {
 let timeCounter = 0;
 function countUp() {
 	timeCounter++;
-	setTimeout("countUp()", 1000);
+	timePointer = setTimeout(countUp, 1000);
 	console.log(timeCounter);
 	displayTimeCounter();
 }
@@ -192,4 +195,11 @@ function countUp() {
 let timeSpan = document.querySelector('.timer');
 function displayTimeCounter() {
 	timeSpan.textContent = timeCounter;
+}
+
+function resetTimer() {
+	started = false;
+	timeCounter = 0;
+	displayTimeCounter();
+	clearTimeout(timePointer);
 }
