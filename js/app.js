@@ -24,21 +24,20 @@ function shuffle(array) {
     return array;
 }
 
-//shuffling the cards
 
+// Shuffling the cards
+// shuffle work only with arrays not with NodeList. Therefore, an array
+// was created to suffle the cards
 let cardsArray = Array.from(cards);
-console.log(cardsArray);
 cardsArray = shuffle(cardsArray);
-console.log(cardsArray);
+
 //access the deck of cards
 const deck = document.querySelector('.deck');
 //set all cards to be closed and add them to the deck
 for (let i = 0; i < cards.length; i++){
 	const currentCard = cardsArray[i];
 	currentCard.className = 'card';
-
 	deck.appendChild(currentCard);
-	currentCard.className += ' open show';
 }
 
 /*
@@ -51,3 +50,55 @@ for (let i = 0; i < cards.length; i++){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+deck.addEventListener('click', clickCard);
+function clickCard(event){
+	if (event.target.nodeName.toLowerCase() == 'li') {
+		displayCardSymbol(event);
+		let numOfOpenCards = addToOpenCards(event);
+		if (numOfOpenCards == 2){
+			checkMatch();
+		}
+		countMoves();
+	}
+}
+
+function displayCardSymbol(event){
+	event.target.className += " open show";
+}
+
+let openCards = [];
+function addToOpenCards(event) {
+	openCards.push(event.target);
+	if (openCards.length == 2) {
+		return 2; //list full and do check
+	} else {
+		return 1; //list has one element
+	}
+}
+
+function checkMatch(){
+	if (openCards[0].querySelector('i').className == openCards[1].querySelector('i').className){
+		lockOpen();
+	} else {
+		setTimeout(function removeCards(){
+	openCards[0].className = "card";
+	openCards[1].className = "card";
+	openCards = [];
+}
+, 1000);
+	}
+}
+
+function lockOpen(){
+	openCards[0].className += " match";
+	openCards[1].className += " match";
+	openCards = [];
+}
+
+
+let moveCounter = 0;
+function countMoves(){
+	moveCounter += 1;
+	console.log(moveCounter);
+}
