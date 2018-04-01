@@ -132,8 +132,14 @@ function checkAllMatched() {
 	}
 }
 
+let scores = document.querySelector('.scores');
 function fireWinPopup() {
     modal.style.display = "block";
+    clearTimeout(timePointer);
+    scores.innerText = `your scores are:
+    Stars:  ${stars.childElementCount}
+    Moves:  ${moveCounter}
+    Time:   ${timeCounter} `;
 }
 
 
