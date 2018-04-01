@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+let cards = document.querySelectorAll('.card');
 
 /*
  * Display the cards on the page
@@ -21,10 +21,25 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
+//shuffling the cards
+
+let cardsArray = Array.from(cards);
+console.log(cardsArray);
+cardsArray = shuffle(cardsArray);
+console.log(cardsArray);
+//access the deck of cards
+const deck = document.querySelector('.deck');
+//set all cards to be closed and add them to the deck
+for (let i = 0; i < cards.length; i++){
+	const currentCard = cardsArray[i];
+	currentCard.className = 'card';
+
+	deck.appendChild(currentCard);
+	currentCard.className += ' open show';
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
