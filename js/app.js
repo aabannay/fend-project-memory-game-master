@@ -28,18 +28,21 @@ function shuffle(array) {
 // Shuffling the cards
 // shuffle work only with arrays not with NodeList. Therefore, an array
 // was created to suffle the cards
-let cardsArray = Array.from(cards);
-cardsArray = shuffle(cardsArray);
-
-//access the deck of cards
 const deck = document.querySelector('.deck');
-//set all cards to be closed and add them to the deck
-for (let i = 0; i < cards.length; i++){
-	const currentCard = cardsArray[i];
-	currentCard.className = 'card';
-	deck.appendChild(currentCard);
+function cardShuffling() {
+	let cardsArray = Array.from(cards);
+	cardsArray = shuffle(cardsArray);
+
+	//access the deck of cards
+	//set all cards to be closed and add them to the deck
+	for (let i = 0; i < cards.length; i++){
+		const currentCard = cardsArray[i];
+		currentCard.className = 'card';
+		deck.appendChild(currentCard);
+	}
 }
 
+cardShuffling();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -121,7 +124,6 @@ function checkAllMatched() {
 	}
 }
 
-const myModal = document.querySelector('#myModal');
 function fireWinPopup() {
     modal.style.display = "block";
 }
@@ -131,9 +133,7 @@ function fireWinPopup() {
 // https://www.w3schools.com/howto/howto_css_modals.asp
 // Get the modal
 const modal = document.getElementById('myModal');
-
-// Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
+const playAgainButton = document.getElementById('replay-button');
 
 // When the user clicks anywhere outside of the modal, DONT close it
 window.onclick = function(event) {
@@ -142,10 +142,34 @@ window.onclick = function(event) {
     }
 }
 
-const playAgainButton = document.getElementById('replay-button');
-
+// when the play again button is clicked.
 playAgainButton.onclick = function(event) {
-
+	resetGame();
+	//remove the modal after the game is reset
+	modal.style.display = "none";
 }
 
+const restart = document.querySelector(".fa-repeat");
 
+restart.onclick = function(event) {
+	resetGame();
+}
+
+function resetGame() {
+	cardShuffling();
+	resetMoves();
+	resetStars();
+}
+
+function resetMoves() {
+	moveCounter = 0;
+	movesSpan.textContent = moveCounter;
+}
+
+function resetStars() {
+	const star = stars.removeChild(stars.firstElementChild);
+	stars.innerHTML = '';
+	for (let i = 0; i < 3; i++){
+		stars.appendChild(star.cloneNode(true));
+	}
+}
