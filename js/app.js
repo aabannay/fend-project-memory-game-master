@@ -80,13 +80,10 @@ function addToOpenCards(event) {
 function checkMatch(){
 	if (openCards[0].querySelector('i').className == openCards[1].querySelector('i').className){
 		lockOpen();
-	} else {
-		setTimeout(function removeCards(){
-	openCards[0].className = "card";
-	openCards[1].className = "card";
-	openCards = [];
-}
-, 1000);
+	} else { setTimeout(function removeCards(){
+			openCards[0].className = "card";
+			openCards[1].className = "card"
+			openCards = [];}, 1000);
 	}
 }
 
@@ -98,7 +95,8 @@ function lockOpen(){
 
 
 let moveCounter = 0;
+const movesSpan = document.querySelector('.moves');
 function countMoves(){
 	moveCounter += 1;
-	console.log(moveCounter);
+	movesSpan.textContent = moveCounter;
 }
